@@ -11,6 +11,7 @@ public class StoryManager : MonoBehaviour
     private DialogueManager dm;
     private ChoiceManager cm;
     private EventManager em;
+    public UI_Manager uiManager;
     [SerializeField] public StoryNode startNode;
     public StoryNode nextNode;
     public StoryNode currentNode;
@@ -19,8 +20,10 @@ public class StoryManager : MonoBehaviour
     private void Awake()
     {
         // instantiate C# managers and references
+        uiManager = GameObject.FindWithTag("UI_Manager").GetComponent<UI_Manager>();
+
         cm = new ChoiceManager(this);
-        dm = new DialogueManager(this, cm);
+        dm = new DialogueManager(this, cm, uiManager);
         em = new EventManager(cm, this, director);
     }
 
@@ -107,18 +110,25 @@ public class DialogueManager
 {
     private StoryManager sm;
     private ChoiceManager cm;
+    private UI_Manager uiManager;
 
-    public DialogueManager(StoryManager sm, ChoiceManager cm)
+    public DialogueManager(StoryManager sm, ChoiceManager cm, UI_Manager uiManager)
     {
         this.sm = sm;
         this.cm = cm;
+        this.uiManager = uiManager;
     }
 
     public void HandleDialogueNode(DialogueNode dialogueNode)
     {
-        sm.nextNode = dialogueNode.nextNode;
-
-        Debug.Log("Dialogue.");
+        if(dialogueNode.isPlayerSpeaking)
+        {
+            uiManager.UpdatePlayerDialogue(dialogueNode.characterName, dialogueNode.dialogueText);
+        }
+        else
+        {
+            uiManager.UpdateCharacterDialogue(dialogueNode.characterName, dialogueNode.characterImage, dialogueNode.dialogueText);
+        }
     }
 }
 
@@ -133,8 +143,6 @@ public class ChoiceManager
 
     public void HandleChoiceNode(ChoiceNode choiceNode)
     {
-        sm.nextNode = choiceNode.nextNode;
-
         Debug.Log("Choice.");
     }
 }
@@ -164,6 +172,8 @@ public class EventManager
     public void OnPlayableDirectorStopped(PlayableDirector pd)
     {
         director.stopped -= OnPlayableDirectorStopped;
+
+        Debug.Log("Event finished.");
 
         sm.OnEventFinished();
     }

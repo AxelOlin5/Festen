@@ -16,3 +16,4 @@ MonoBehaviour:
   characterName: Dig
   characterImage: {fileID: 0}
   dialogueText: "I lige m\xE5de Jonas. Det l\xE6nge siden"
+  isPlayerSpeaking: 1

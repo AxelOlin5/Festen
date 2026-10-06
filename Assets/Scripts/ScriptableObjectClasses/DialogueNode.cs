@@ -8,4 +8,5 @@ public class DialogueNode : StoryNode
     public string characterName;
     public Sprite characterImage;
     public string dialogueText;
+    public bool isPlayerSpeaking;
 }
