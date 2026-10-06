@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f491463dcd20e4d913f6797ab9dfa0, type: 3}
+  m_Name: JonasAnkomsten1A
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  nextNode: {fileID: 11400000, guid: 185d2e03a58aab342a2f04e4b647d89c, type: 2}
+  characterName: Jonas
+  characterImage: {fileID: 21300000, guid: bb7232b6c9672e54eb80d995c15ea62e, type: 3}
+  dialogueText: "Ok ok. Det g\xE5r nok, vi har ogs\xE5 nogle \xF8l og vodka du kan
+    blande op med hvis det er! "

@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Dialogue1
+  m_Script: {fileID: 11500000, guid: 96f491463dcd20e4d913f6797ab9dfa0, type: 3}
+  m_Name: JonasAnkomsten1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  isDialogueNode: 1
-  isChoiceNode: 0
-  isEventNode: 0
+  nextNode: {fileID: 11400000, guid: 7394cf20de7047f46b0177514d69289e, type: 2}
   characterName: Jonas
   characterImage: {fileID: 21300000, guid: bb7232b6c9672e54eb80d995c15ea62e, type: 3}
-  dialogueText:
-  - "Yooo! Hvad s\xE5? Godt at se dig!"
+  dialogueText: "Yoooooo, hvad s\xE5 {playerName}? Godt at se dig!"

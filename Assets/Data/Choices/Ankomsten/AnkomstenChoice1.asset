@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f06606341e5044af4cda4ea255af2, type: 3}
+  m_Name: AnkomstenChoice1
+  m_EditorClassIdentifier: Assembly-CSharp::ChoiceNode
+  nextNode: {fileID: 0}
+  choiceDialogueText: Hvad har du i posen?
+  choiceOptions:
+  - {fileID: 11400000, guid: 3a323bb537f58a943acfd1204ad54a2c, type: 2}
+  - {fileID: 11400000, guid: 0adea94797cb4a94aae89c7e4ab71995, type: 2}
+  - {fileID: 11400000, guid: 94c6277e278432d4e92a829c44a0dcc3, type: 2}
+  - {fileID: 11400000, guid: 3a892526f271d87418e51606935e65bf, type: 2}

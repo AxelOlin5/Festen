@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Event1
-  m_EditorClassIdentifier: Assembly-CSharp::EventNode
-  isDialogueNode: 0
-  isChoiceNode: 0
-  isEventNode: 1
-  eventID: Ankomst_Intro
+  m_Script: {fileID: 11500000, guid: 947e729d5994a4d45bbd164c44fd9fa2, type: 3}
+  m_Name: AnkomstenOption1C
+  m_EditorClassIdentifier: Assembly-CSharp::ChoiceOption
+  choiceText: Alkoholfri
+  nextNode: {fileID: 11400000, guid: eb3278ebc5c4ca04cbcbcb0ddea25818, type: 2}

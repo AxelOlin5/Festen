@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class StoryManager : MonoBehaviour
 {
@@ -9,20 +11,23 @@ public class StoryManager : MonoBehaviour
     private DialogueManager dm;
     private ChoiceManager cm;
     private EventManager em;
-    [SerializeField] private List<StoryNode> storyNodes = new List<StoryNode>();
-    [SerializeField] private int currentNodeIndex = -1;
+    [SerializeField] public StoryNode startNode;
+    public StoryNode nextNode;
+    public StoryNode currentNode;
+    [SerializeField] private PlayableDirector director;
 
     private void Awake()
     {
-        // instantiate plain C# managers and wire references
+        // instantiate C# managers and references
         cm = new ChoiceManager(this);
         dm = new DialogueManager(this, cm);
-        em = new EventManager(cm);
+        em = new EventManager(cm, this, director);
     }
 
     private void Start()
     {
-        NextNode();
+        currentNode = startNode;
+        NextNode(startNode);
     }
 
     void OnEnable()
@@ -44,24 +49,39 @@ public class StoryManager : MonoBehaviour
 
     private void OnDialogueClick(InputAction.CallbackContext context)
     {
-        if (context.performed && !cm.making_A_Choice)
+        if (context.performed && currentNode is DialogueNode dialogueNode)
         {
-            NextNode();
+            NextNode(dialogueNode.nextNode);
         }
     }
 
-    public void NextNode()
+    public void OnEventFinished()
     {
-
-        if (storyNodes == null || storyNodes.Count == 0)
+        if (currentNode is EventNode eventNode)
         {
-             Debug.LogWarning("No story nodes available.");
+            NextNode(eventNode.nextNode);
+        }
+    }
+
+    public void OnChoiceMade()
+    {
+        if (currentNode is ChoiceNode choiceNode)
+        {
+            NextNode(choiceNode.nextNode);
+        }
+    }
+
+    public void NextNode(StoryNode nextNode)
+    {
+        StoryNode node = nextNode;
+
+        currentNode = node;
+
+        if (node == null)
+        {
+             Debug.LogWarning("No story node available. Game Finished");
              return;
         }
-
-        currentNodeIndex++;
-
-        StoryNode node = storyNodes[currentNodeIndex];
 
         switch (node)
         {
@@ -83,8 +103,6 @@ public class StoryManager : MonoBehaviour
 }
 
 
-// Make these plain C# classes (remove MonoBehaviour)
-
 public class DialogueManager
 {
     private StoryManager sm;
@@ -98,7 +116,7 @@ public class DialogueManager
 
     public void HandleDialogueNode(DialogueNode dialogueNode)
     {
-        cm.making_A_Choice = false;
+        sm.nextNode = dialogueNode.nextNode;
 
         Debug.Log("Dialogue.");
     }
@@ -106,7 +124,6 @@ public class DialogueManager
 
 public class ChoiceManager
 {
-    public bool making_A_Choice = false;
     private StoryManager sm;
 
     public ChoiceManager(StoryManager sm)
@@ -116,7 +133,7 @@ public class ChoiceManager
 
     public void HandleChoiceNode(ChoiceNode choiceNode)
     {
-        making_A_Choice = true;
+        sm.nextNode = choiceNode.nextNode;
 
         Debug.Log("Choice.");
     }
@@ -125,17 +142,29 @@ public class ChoiceManager
 public class EventManager
 {
     private ChoiceManager cm;
+    private StoryManager sm;
+    private PlayableDirector director;
 
-    public EventManager(ChoiceManager cm)
+    public EventManager(ChoiceManager cm, StoryManager sm, PlayableDirector director)
     {
         this.cm = cm;
+        this.sm = sm;
+        this.director = director;
     }
 
     public void HandleEventNode(EventNode eventNode)
     {
-        cm.making_A_Choice = false;
+        director.playableAsset = eventNode.timelineAsset;
 
-        eventNode.TriggerEvent();
-        Debug.Log("Event.");
+        director.stopped += OnPlayableDirectorStopped;
+
+        director.Play();
+    }
+
+    public void OnPlayableDirectorStopped(PlayableDirector pd)
+    {
+        director.stopped -= OnPlayableDirectorStopped;
+
+        sm.OnEventFinished();
     }
 }

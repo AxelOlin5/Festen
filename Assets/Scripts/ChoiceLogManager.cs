@@ -58,9 +58,8 @@ public class ChoiceLogManager : MonoBehaviour
     {
         return playerName;
     }
-    public string SetPlayerName(string name)
+    public void SetPlayerName(string name)
     {
         playerName = name;
-        return playerName;
     }
 }
