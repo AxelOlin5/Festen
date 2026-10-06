@@ -27,7 +27,7 @@ public class UI_Manager : MonoBehaviour
         characterImageComponent = GameObject.FindWithTag("CharacterImage").GetComponent<SpriteRenderer>();
         choiceContainer = UIDocument.rootVisualElement.Q<VisualElement>("ChoiceContainer");
 
-        UIDocument.rootVisualElement.style.display = DisplayStyle.None; // Hide the UI initially
+        HideDialogueUI();
 
         Debug.Log($"SpeakerName found: {speakerName != null}");
     }
@@ -35,18 +35,17 @@ public class UI_Manager : MonoBehaviour
     public void ShowDialogueUI()
     {
         // Code to show the dialogue UI
-        UIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+        textBox.style.opacity = 1f;
     }
 
     public void HideDialogueUI()
     {
         // Code to hide the dialogue UI
-        UIDocument.rootVisualElement.style.display = DisplayStyle.None;
+        textBox.style.opacity = 0f;
     }
 
     public void UpdateCharacterDialogue(string characterName, Sprite characterImage, string dialogueText, Color speakerColor)
     {
-        ShowDialogueUI();
         // Code to update the dialogue in the UI
         if (textBoxText != null)
         {
@@ -68,7 +67,6 @@ public class UI_Manager : MonoBehaviour
 
     public void UpdatePlayerDialogue(string characterName, string dialogueText, Color speakerColor)
     {
-        ShowDialogueUI();
         // Code to update the dialogue in the UI
         if (textBoxText != null)
         {
