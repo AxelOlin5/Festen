@@ -22,7 +22,7 @@ public class StoryManager : MonoBehaviour
         // instantiate C# managers and references
         uiManager = GameObject.FindWithTag("UI_Manager").GetComponent<UI_Manager>();
 
-        cm = new ChoiceManager(this);
+        cm = new ChoiceManager(this, uiManager);
         dm = new DialogueManager(this, cm, uiManager);
         em = new EventManager(cm, this, director);
     }
@@ -66,11 +66,14 @@ public class StoryManager : MonoBehaviour
         }
     }
 
-    public void OnChoiceMade()
+    public void OnChoiceMade(int choiceIndex)
     {
         if (currentNode is ChoiceNode choiceNode)
         {
-            NextNode(choiceNode.nextNode);
+            ChoiceOption selectedChoice = choiceNode.choiceOptions[choiceIndex];
+
+            NextNode(selectedChoice.nextNode);
+            uiManager.HideChoices();
         }
     }
 
@@ -123,11 +126,11 @@ public class DialogueManager
     {
         if(dialogueNode.isPlayerSpeaking)
         {
-            uiManager.UpdatePlayerDialogue(dialogueNode.characterName, dialogueNode.dialogueText);
+            uiManager.UpdatePlayerDialogue(dialogueNode.characterName, dialogueNode.dialogueText, dialogueNode.speakerColor);
         }
         else
         {
-            uiManager.UpdateCharacterDialogue(dialogueNode.characterName, dialogueNode.characterImage, dialogueNode.dialogueText);
+            uiManager.UpdateCharacterDialogue(dialogueNode.characterName, dialogueNode.characterImage, dialogueNode.dialogueText, dialogueNode.speakerColor);
         }
     }
 }
@@ -135,16 +138,24 @@ public class DialogueManager
 public class ChoiceManager
 {
     private StoryManager sm;
+    private UI_Manager uiManager;
 
-    public ChoiceManager(StoryManager sm)
+    public ChoiceManager(StoryManager sm, UI_Manager uiManager)
     {
         this.sm = sm;
+        this.uiManager = uiManager;
     }
 
     public void HandleChoiceNode(ChoiceNode choiceNode)
     {
-        Debug.Log("Choice.");
+        sm.currentNode = choiceNode;
+        uiManager.ShowChoices(choiceNode.choiceOptions, choiceNode, (choiceIndex) => 
+        {
+            sm.OnChoiceMade(choiceIndex);
+        });
     }
+
+
 }
 
 public class EventManager

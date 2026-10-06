@@ -17,3 +17,5 @@ MonoBehaviour:
   characterImage: {fileID: 21300000, guid: bb7232b6c9672e54eb80d995c15ea62e, type: 3}
   dialogueText: "Ok ok. Det g\xE5r nok, vi har ogs\xE5 nogle \xF8l og vodka du kan
     blande op med hvis det er! "
+  isPlayerSpeaking: 0
+  speakerColor: {r: 0, g: 0.654902, b: 1, a: 1}

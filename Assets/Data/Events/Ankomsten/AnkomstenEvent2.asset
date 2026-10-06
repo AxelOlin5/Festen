@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EventNode
   nextNode: {fileID: 11400000, guid: f38f51a26e167544ea1b28356e05534d, type: 2}
   eventID: AnkomstenEvent2
+  timelineAsset: {fileID: 11400000, guid: c06cf6d647326d0458d42e37172c1ec2, type: 2}

@@ -16,3 +16,5 @@ MonoBehaviour:
   characterName: Jonas
   characterImage: {fileID: 21300000, guid: bb7232b6c9672e54eb80d995c15ea62e, type: 3}
   dialogueText: "Vaaarmt! Godt at se intet har \xE6ndret sig. "
+  isPlayerSpeaking: 0
+  speakerColor: {r: 0, g: 0.654902, b: 1, a: 1}

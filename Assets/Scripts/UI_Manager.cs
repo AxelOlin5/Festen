@@ -1,47 +1,60 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
+using System;
 
 public class UI_Manager : MonoBehaviour
 {
-    private UIDocument rootVisualElement;
+    private UIDocument UIDocument;
     private VisualElement textBox;
     private Label textBoxText;
     private VisualElement speakerName;
     private Label speakerNameText;
-    private Sprite characterImageComponent;
+    private SpriteRenderer characterImageComponent;
+    private VisualElement choiceContainer;
 
     private void Awake()
     {
         // Initialize UI elements here
-        rootVisualElement = GetComponent<UIDocument>();
+        UIDocument = GetComponent<UIDocument>();
 
-        textBox = rootVisualElement.rootVisualElement.Q<VisualElement>("TextBox");
+        textBox = UIDocument.rootVisualElement.Q<VisualElement>("TextBox");
         textBoxText = textBox.Q<Label>("TextBoxText");
+
         speakerName = textBox.Q<VisualElement>("SpeakerName");
         speakerNameText = speakerName.Q<Label>("SpeakerNameText");
-        characterImageComponent = GameObject.FindWithTag("CharacterImage").GetComponent<SpriteRenderer>().sprite;
-        rootVisualElement.rootVisualElement.style.display = DisplayStyle.None; // Hide the UI initially
+
+        characterImageComponent = GameObject.FindWithTag("CharacterImage").GetComponent<SpriteRenderer>();
+        choiceContainer = UIDocument.rootVisualElement.Q<VisualElement>("ChoiceContainer");
+
+        UIDocument.rootVisualElement.style.display = DisplayStyle.None; // Hide the UI initially
+
+        Debug.Log($"SpeakerName found: {speakerName != null}");
     }
 
     public void ShowDialogueUI()
     {
         // Code to show the dialogue UI
-        rootVisualElement.rootVisualElement.style.display = DisplayStyle.Flex;
+        UIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 
     public void HideDialogueUI()
     {
         // Code to hide the dialogue UI
-        rootVisualElement.rootVisualElement.style.display = DisplayStyle.Flex;
+        UIDocument.rootVisualElement.style.display = DisplayStyle.None;
     }
 
-    public void UpdateCharacterDialogue(string characterName, Sprite characterImage, string dialogueText)
+    public void UpdateCharacterDialogue(string characterName, Sprite characterImage, string dialogueText, Color speakerColor)
     {
+        ShowDialogueUI();
         // Code to update the dialogue in the UI
         if (textBoxText != null)
         {
             textBoxText.text = dialogueText;
+        }
+        if(speakerName != null)
+        {
+            ChangeBorderColor(speakerName, speakerColor);
         }
         if (speakerNameText != null)
         {
@@ -49,20 +62,64 @@ public class UI_Manager : MonoBehaviour
         }
         if (characterImageComponent != null)
         {
-            characterImageComponent = characterImage;
+            characterImageComponent.sprite = characterImage;
         }
     }
 
-    public void UpdatePlayerDialogue(string characterName, string dialogueText)
+    public void UpdatePlayerDialogue(string characterName, string dialogueText, Color speakerColor)
     {
+        ShowDialogueUI();
         // Code to update the dialogue in the UI
         if (textBoxText != null)
         {
             textBoxText.text = dialogueText;
         }
+        if (speakerName != null)
+        {
+            ChangeBorderColor(speakerName, speakerColor);
+        }
         if (speakerNameText != null)
         {
             speakerNameText.text = characterName;
         }
+    }
+    public void ChangeBorderColor(VisualElement visualElement, Color color)
+    {
+        visualElement.style.borderTopColor = color;
+        visualElement.style.borderBottomColor = color;
+        visualElement.style.borderLeftColor = color;
+        visualElement.style.borderRightColor = color;
+
+        visualElement.style.borderTopWidth = 4;
+        visualElement.style.borderBottomWidth = 4;
+        visualElement.style.borderLeftWidth = 4;
+        visualElement.style.borderRightWidth = 4;
+
+        Debug.Log($"Changing speaker border to: {color}");
+    }
+
+    public void ShowChoices(List<ChoiceOption> choices, ChoiceNode choiceNode, Action<int> onChoiceSelected)
+    {
+        choiceContainer.Clear();
+
+        for (int i = 0; i < choices.Count; i++)
+        {
+            int choiceIndex = i;
+
+            Button button = new Button();
+            button.text = choices[i].choiceText;
+            button.AddToClassList("choiceButton");
+
+            button.clicked += () => onChoiceSelected(choiceIndex);
+
+            choiceContainer.Add(button);
+        }
+        
+        textBoxText.text = choiceNode.choiceDialogueText;
+    }
+
+    public void HideChoices()
+    {
+        choiceContainer.Clear();
     }
 }

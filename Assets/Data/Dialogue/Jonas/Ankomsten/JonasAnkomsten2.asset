@@ -16,3 +16,5 @@ MonoBehaviour:
   characterName: Jonas
   characterImage: {fileID: 21300000, guid: bb7232b6c9672e54eb80d995c15ea62e, type: 3}
   dialogueText: Det siger du ikke.
+  isPlayerSpeaking: 0
+  speakerColor: {r: 0, g: 0.653409, b: 1, a: 1}

@@ -9,4 +9,5 @@ public class DialogueNode : StoryNode
     public Sprite characterImage;
     public string dialogueText;
     public bool isPlayerSpeaking;
+    public Color speakerColor;
 }
