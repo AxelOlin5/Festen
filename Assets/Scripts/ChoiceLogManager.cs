@@ -14,6 +14,11 @@ public class ChoiceLogManager : MonoBehaviour
 
     private int alcoholConsumed = 0;
 
+    private void Start()
+    {
+        Debug.Log("broughtAlcohol: " + broughtAlcohol);
+    }
+
     public void ApplyEffects(ChoiceOption choiceOption)
     {
         if(choiceOption.effects == null || choiceOption.effects.Count == 0)
@@ -30,14 +35,17 @@ public class ChoiceLogManager : MonoBehaviour
                 {
                     case "broughtAlcohol":
                         broughtAlcohol = effect.effectBoolValue;
+                        Debug.Log("broughtAlcohol set to: " + broughtAlcohol);
                         break;
 
                     case "talkedToEmma":
                         talkedToEmma = effect.effectBoolValue;
+                        Debug.Log("talkedToEmma set to: " + talkedToEmma);
                         break;
 
                     case "joinedTheDrinkingGame":
                         joinedTheDrinkingGame = effect.effectBoolValue;
+                        Debug.Log("joinedTheDrinkingGame set to: " + joinedTheDrinkingGame);
                         break;
 
                     default:

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04abec824837352439498b734005394f, type: 3}
   m_Name: AnkomstenEvent2
   m_EditorClassIdentifier: Assembly-CSharp::EventNode
-  nextNode: {fileID: 11400000, guid: f38f51a26e167544ea1b28356e05534d, type: 2}
+  nextNode: {fileID: 0}
   eventID: AnkomstenEvent2
   timelineAsset: {fileID: 11400000, guid: c06cf6d647326d0458d42e37172c1ec2, type: 2}

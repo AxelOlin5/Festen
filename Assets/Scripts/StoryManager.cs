@@ -56,6 +56,7 @@ public class StoryManager : MonoBehaviour
     {
         if (context.performed && currentNode is DialogueNode dialogueNode)
         {
+            Debug.Log("Click detected. Progressing...");
             NextNode(dialogueNode.nextNode);
         }
     }
@@ -70,6 +71,8 @@ public class StoryManager : MonoBehaviour
 
     public void OnChoiceMade(ChoiceOption selectedChoice)
     {
+        Debug.Log("Choice made.");
+
         choiceLogManager.ApplyEffects(selectedChoice);
 
         uiManager.HideChoices();
@@ -79,6 +82,7 @@ public class StoryManager : MonoBehaviour
 
     public void NextNode(StoryNode nextNode)
     {
+        Debug.Log("Moving to next node.");
         StoryNode node = nextNode;
 
         currentNode = node;
@@ -124,7 +128,8 @@ public class DialogueManager
 
     public void HandleDialogueNode(DialogueNode dialogueNode)
     {
-        if(dialogueNode.isPlayerSpeaking)
+        Debug.Log("Displaying dialogue.");
+        if (dialogueNode.isPlayerSpeaking)
         {
             uiManager.UpdatePlayerDialogue(dialogueNode.characterName, dialogueNode.dialogueText, dialogueNode.speakerColor);
         }
@@ -162,6 +167,8 @@ public class ChoiceManager
             }
         }
 
+        Debug.Log("Displaying choices.");
+
         uiManager.ShowChoices(availableChoiceOptions, choiceNode, (choiceIndex) => 
         {
             ChoiceOption selectedOption = availableChoiceOptions[choiceIndex];
@@ -191,6 +198,7 @@ public class EventManager
         director.stopped += OnPlayableDirectorStopped;
 
         director.Play();
+        Debug.Log("Event started.");
     }
 
     public void OnPlayableDirectorStopped(PlayableDirector pd)

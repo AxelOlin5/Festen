@@ -30,8 +30,6 @@ public class UI_Manager : MonoBehaviour
         choiceContainer = UIDocument.rootVisualElement.Q<VisualElement>("ChoiceContainer");
 
         textBox.style.opacity = 0f;
-
-        Debug.Log($"SpeakerName found: {speakerName != null}");
     }
 
     public void ShowDialogueUI()
@@ -106,8 +104,6 @@ public class UI_Manager : MonoBehaviour
         visualElement.style.borderBottomWidth = 4;
         visualElement.style.borderLeftWidth = 4;
         visualElement.style.borderRightWidth = 4;
-
-        Debug.Log($"Changing speaker border to: {color}");
     }
 
     public void ShowChoices(List<ChoiceOption> choices, ChoiceNode choiceNode, Action<int> onChoiceSelected)

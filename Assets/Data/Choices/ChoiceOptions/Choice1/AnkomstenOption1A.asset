@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: AnkomstenOption1A
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceOption
   choiceText: Sodavand
+  requirements: []
+  effects:
+  - effectName: broughtAlcohol
+    effectValueType: 0
+    effectBoolValue: 0
+    effectIntValue: 0
   nextNode: {fileID: 11400000, guid: eb3278ebc5c4ca04cbcbcb0ddea25818, type: 2}
