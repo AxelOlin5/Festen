@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using static ChoiceOptionEffect;
 
+[Serializable]
 public class ChoiceOptionRequirement
 {
     public string requirementName;

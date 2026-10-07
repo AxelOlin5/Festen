@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StoryManager
   ClickAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   uiManager: {fileID: 0}
+  choiceLogManager: {fileID: 0}
   startNode: {fileID: 11400000, guid: 2d6b32ca604920b498ced2b6e2ac3f53, type: 2}
   nextNode: {fileID: 0}
   currentNode: {fileID: 0}
@@ -1473,7 +1474,7 @@ GameObject:
   - component: {fileID: 1966718159}
   m_Layer: 0
   m_Name: ChoiceLogManager
-  m_TagString: Untagged
+  m_TagString: ChoiceLogManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UI_Manager
   - CharacterImage
+  - ChoiceLogManager
   layers:
   - Default
   - TransparentFX
