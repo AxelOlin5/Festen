@@ -12,6 +12,7 @@ public class StoryManager : MonoBehaviour
     private ChoiceManager cm;
     private EventManager em;
     public UI_Manager uiManager;
+    public ChoiceLogManager choiceLogManager;
     [SerializeField] public StoryNode startNode;
     public StoryNode nextNode;
     public StoryNode currentNode;
@@ -21,8 +22,9 @@ public class StoryManager : MonoBehaviour
     {
         // instantiate C# managers and references
         uiManager = GameObject.FindWithTag("UI_Manager").GetComponent<UI_Manager>();
+        choiceLogManager = GameObject.FindWithTag("ChoiceLogManager").GetComponent<ChoiceLogManager>();
 
-        cm = new ChoiceManager(this, uiManager);
+        cm = new ChoiceManager(this, uiManager, choiceLogManager);
         dm = new DialogueManager(this, cm, uiManager);
         em = new EventManager(cm, this, director);
     }
@@ -139,11 +141,13 @@ public class ChoiceManager
 {
     private StoryManager sm;
     private UI_Manager uiManager;
+    private ChoiceLogManager choiceLogManager;
 
-    public ChoiceManager(StoryManager sm, UI_Manager uiManager)
+    public ChoiceManager(StoryManager sm, UI_Manager uiManager, ChoiceLogManager choiceLogManager)
     {
         this.sm = sm;
         this.uiManager = uiManager;
+        this.choiceLogManager = choiceLogManager;
     }
 
     public void HandleChoiceNode(ChoiceNode choiceNode)
@@ -154,7 +158,6 @@ public class ChoiceManager
             sm.OnChoiceMade(choiceIndex);
         });
     }
-
 
 }
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
+using System.Collections;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     private Label speakerNameText;
     private SpriteRenderer characterImageComponent;
     private VisualElement choiceContainer;
+    //private Coroutine fadeCoroutine;
 
     private void Awake()
     {
@@ -27,21 +29,33 @@ public class UI_Manager : MonoBehaviour
         characterImageComponent = GameObject.FindWithTag("CharacterImage").GetComponent<SpriteRenderer>();
         choiceContainer = UIDocument.rootVisualElement.Q<VisualElement>("ChoiceContainer");
 
-        HideDialogueUI();
+        textBox.style.opacity = 0f;
 
         Debug.Log($"SpeakerName found: {speakerName != null}");
     }
 
     public void ShowDialogueUI()
     {
-        // Code to show the dialogue UI
-        textBox.style.opacity = 1f;
+        StartCoroutine(FadeDialogue(0f, 1f, 0.5f));
     }
 
     public void HideDialogueUI()
     {
-        // Code to hide the dialogue UI
-        textBox.style.opacity = 0f;
+        StartCoroutine(FadeDialogue(1f, 0f, 0.5f));
+    }
+
+    private IEnumerator FadeDialogue(float startOpacity, float targetOpacity, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newOpacity = Mathf.Lerp(startOpacity, targetOpacity, elapsedTime / duration);
+            textBox.style.opacity = newOpacity;
+            yield return null;
+        }
+        textBox.style.opacity = targetOpacity;
     }
 
     public void UpdateCharacterDialogue(string characterName, Sprite characterImage, string dialogueText, Color speakerColor)

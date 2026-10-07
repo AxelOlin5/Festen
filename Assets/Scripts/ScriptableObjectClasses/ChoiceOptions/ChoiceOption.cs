@@ -7,8 +7,8 @@ using UnityEngine;
 public class ChoiceOption : ScriptableObject
 {
     public string choiceText;
-    public Dictionary<string, bool> requirements;
-    public Dictionary<string, bool> effects;
+    public List<ChoiceOptionRequirement> requirements; 
+    public List<ChoiceOptionEffect> effects; 
 
     public StoryNode nextNode;
 }
