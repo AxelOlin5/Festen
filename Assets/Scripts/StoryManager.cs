@@ -68,15 +68,13 @@ public class StoryManager : MonoBehaviour
         }
     }
 
-    public void OnChoiceMade(int choiceIndex)
+    public void OnChoiceMade(ChoiceOption selectedChoice)
     {
-        if (currentNode is ChoiceNode choiceNode)
-        {
-            ChoiceOption selectedChoice = choiceNode.choiceOptions[choiceIndex];
+        choiceLogManager.ApplyEffects(selectedChoice);
 
-            NextNode(selectedChoice.nextNode);
-            uiManager.HideChoices();
-        }
+        uiManager.HideChoices();
+
+        NextNode(selectedChoice.nextNode);
     }
 
     public void NextNode(StoryNode nextNode)
@@ -153,12 +151,24 @@ public class ChoiceManager
     public void HandleChoiceNode(ChoiceNode choiceNode)
     {
         sm.currentNode = choiceNode;
-        uiManager.ShowChoices(choiceNode.choiceOptions, choiceNode, (choiceIndex) => 
+
+        List<ChoiceOption> availableChoiceOptions = new List<ChoiceOption>();
+
+        foreach(ChoiceOption choiceOption in choiceNode.choiceOptions)
         {
-            sm.OnChoiceMade(choiceIndex);
+            if (choiceLogManager.CheckRequirements(choiceOption))
+            {
+                availableChoiceOptions.Add(choiceOption);
+            }
+        }
+
+        uiManager.ShowChoices(availableChoiceOptions, choiceNode, (choiceIndex) => 
+        {
+            ChoiceOption selectedOption = availableChoiceOptions[choiceIndex];
+
+            sm.OnChoiceMade(selectedOption);
         });
     }
-
 }
 
 public class EventManager

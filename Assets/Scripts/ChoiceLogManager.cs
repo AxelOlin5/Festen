@@ -14,7 +14,7 @@ public class ChoiceLogManager : MonoBehaviour
 
     private int alcoholConsumed = 0;
 
-    public void ApplyEffect(ChoiceOption choiceOption)
+    public void ApplyEffects(ChoiceOption choiceOption)
     {
         if(choiceOption.effects == null || choiceOption.effects.Count == 0)
         {
@@ -108,7 +108,6 @@ public class ChoiceLogManager : MonoBehaviour
                         Debug.LogWarning("Unknown requirement name: " + requirement.requirementName);
                         return false;
                 }
-                break;
             }
             else if (requirement.requirementValueType == ChoiceOptionRequirement.RequirementType.Int)
             {
@@ -125,7 +124,6 @@ public class ChoiceLogManager : MonoBehaviour
                         Debug.LogWarning("Unknown requirement name: " + requirement.requirementName);
                         return false;
                 }
-                break;
             }
         }
         // All requirements passed
@@ -142,7 +140,7 @@ public class ChoiceLogManager : MonoBehaviour
             isPlayerDrunk = true;
             // You can add additional logic here to handle the drunk state
         }
-        else if(alcoholConsumed > 20)
+        else if(alcoholConsumed >= 20)
         {
             Debug.Log("Player is now very drunk!");
             isPlayerDrunk = true;
