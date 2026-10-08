@@ -5,6 +5,7 @@
             <ui:Label text="Speaker" name="SpeakerNameText" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 35px; -unity-font-style: bold; -unity-text-align: upper-center;"/>
         </ui:VisualElement>
         <ui:Label text="Dialogue Text Here" name="TextBoxText" style="position: absolute; right: 3%; top: 12%; flex-wrap: wrap; align-self: flex-start; font-size: 30%; color: rgb(255, 255, 255); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0.05px; height: 68%; width: 77%; align-content: center; white-space: normal;"/>
+        <ui:Image style="background-image: url(&quot;project://database/Assets/_Heathen%20Engineering/Assets/UX/Icons/Flat%20Icons%20[Free]/Free%20Flat%20Arrow%203%20NW%20Icon.png?fileID=21300000&amp;guid=0908671c4d9d28e4890451f605e68243&amp;type=3#Free Flat Arrow 3 NW Icon&quot;); flex-shrink: 0; width: 14%; height: 25%; aspect-ratio: 1; right: -96%; top: 17%;"/>
     </ui:VisualElement>
     <ui:VisualElement name="ChoiceContainer" style="flex-grow: 0; flex-shrink: 0; align-self: center; align-content: center; justify-content: center; align-items: center; width: 60%; height: 50%; top: 10%;"/>
 </ui:UXML>
