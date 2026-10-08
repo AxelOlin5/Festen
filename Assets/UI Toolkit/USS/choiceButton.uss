@@ -2,15 +2,15 @@
 }
 
 .choiceButton {
-    border-top-width: 4px;
-    border-right-width: 4px;
-    border-bottom-width: 4px;
-    border-left-width: 4px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
     border-bottom-color: rgb(255, 255, 255);
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
     border-top-color: rgb(255, 255, 255);
-    background-color: rgb(215, 188, 82);
+    background-color: rgba(0, 0, 0, 0.651);
     -unity-text-align: upper-center;
     font-size: 295%;
     -unity-font-style: bold;
@@ -19,25 +19,36 @@
     align-self: center;
     justify-content: center;
     flex-shrink: 0;
+    color: rgb(255, 255, 255);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
 }
 
 
 
-.choiceButton :hover {
+.choiceButton:hover {
     border-top-width: 4px;
     border-right-width: 4px;
     border-bottom-width: 4px;
     border-left-width: 4px;
-    border-bottom-color: rgb(107, 107, 107);
-    border-left-color: rgb(107, 107, 107);
-    border-right-color: rgb(107, 107, 107);
-    border-top-color: rgb(107, 107, 107);
-    background-color: rgb(145, 126, 18);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     -unity-text-align: upper-center;
-    font-size: 32%;
+    font-size: 295%;
     -unity-font-style: bold;
-    height: 20%;
+    height: auto;
     align-content: center;
     align-self: center;
     justify-content: center;
+    flex-shrink: 0;
+    color: rgb(255, 255, 255);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
 }

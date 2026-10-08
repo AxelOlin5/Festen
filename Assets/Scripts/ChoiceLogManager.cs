@@ -1,5 +1,3 @@
-using NUnit.Framework.Internal;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ChoiceLogManager : MonoBehaviour
